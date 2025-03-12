@@ -23,8 +23,8 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/ваш_логин/FanslyParsingBot.git
-   cd FanslyParsingBot
+   git clone https://github.com/averageencoreenjoer/FanslyTelegramBot.git
+   cd FanslyTelegramBot
 2. Установите зависимости:
    ```bash
    pip install -r requirements.txt
