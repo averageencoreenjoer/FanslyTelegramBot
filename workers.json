@@ -1,0 +1,10 @@
+{
+  "worker1": {
+    "login": "worker1",
+    "password": "worker123"
+  },
+  "worker2": {
+    "login": "worker2",
+    "password": "worker456"
+  }
+}

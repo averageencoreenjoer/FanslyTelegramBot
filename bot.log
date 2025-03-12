@@ -1,0 +1,156 @@
+2025-02-14 14:31:58,902 - INFO - Start polling
+2025-02-14 14:31:59,264 - INFO - Run polling for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 14:32:05,597 - INFO - Update id=902095018 is handled. Duration 603 ms by bot id=7745376176
+2025-02-14 14:32:06,773 - INFO - Update id=902095019 is handled. Duration 219 ms by bot id=7745376176
+2025-02-14 14:32:07,702 - INFO - ====== WebDriver manager ======
+2025-02-14 14:32:08,021 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 14:32:08,536 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 14:32:09,021 - INFO - Driver [/Users/test/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver] found in cache
+2025-02-14 14:33:08,230 - INFO - Update id=902095020 is handled. Duration 60752 ms by bot id=7745376176
+2025-02-14 14:33:34,476 - INFO - Update id=902095021 is not handled. Duration 11 ms by bot id=7745376176
+2025-02-14 14:33:41,565 - INFO - Update id=902095022 is not handled. Duration 2 ms by bot id=7745376176
+2025-02-14 14:33:43,642 - INFO - Update id=902095023 is not handled. Duration 3 ms by bot id=7745376176
+2025-02-14 14:35:07,587 - WARNING - Received SIGINT signal
+2025-02-14 14:35:07,694 - INFO - Polling stopped for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 14:35:07,701 - INFO - Polling stopped
+2025-02-14 14:37:20,564 - INFO - Start polling
+2025-02-14 14:37:21,038 - INFO - Run polling for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 14:37:24,846 - INFO - Update id=902095024 is handled. Duration 491 ms by bot id=7745376176
+2025-02-14 14:37:26,472 - INFO - Update id=902095025 is handled. Duration 163 ms by bot id=7745376176
+2025-02-14 14:37:27,360 - INFO - Update id=902095026 is handled. Duration 218 ms by bot id=7745376176
+2025-02-14 14:37:34,901 - INFO - Update id=902095027 is handled. Duration 337 ms by bot id=7745376176
+2025-02-14 14:37:39,569 - INFO - Update id=902095028 is handled. Duration 258 ms by bot id=7745376176
+2025-02-14 14:37:43,458 - INFO - Update id=902095029 is handled. Duration 252 ms by bot id=7745376176
+2025-02-14 14:37:45,678 - INFO - Update id=902095030 is handled. Duration 234 ms by bot id=7745376176
+2025-02-14 14:37:46,554 - INFO - ====== WebDriver manager ======
+2025-02-14 14:37:46,985 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 14:37:47,444 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 14:37:47,756 - INFO - Driver [/Users/test/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver] found in cache
+2025-02-14 14:38:35,058 - INFO - Update id=902095031 is handled. Duration 48686 ms by bot id=7745376176
+2025-02-14 14:38:44,028 - INFO - Update id=902095032 is not handled. Duration 6 ms by bot id=7745376176
+2025-02-14 14:38:57,301 - INFO - Update id=902095033 is handled. Duration 141 ms by bot id=7745376176
+2025-02-14 14:39:20,275 - WARNING - Received SIGINT signal
+2025-02-14 14:39:20,337 - INFO - Polling stopped for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 14:39:20,338 - INFO - Polling stopped
+2025-02-14 14:40:57,210 - INFO - Start polling
+2025-02-14 14:41:00,860 - INFO - Run polling for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 14:41:10,702 - INFO - Update id=902095034 is handled. Duration 511 ms by bot id=7745376176
+2025-02-14 14:41:12,331 - INFO - ====== WebDriver manager ======
+2025-02-14 14:41:13,050 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 14:41:14,713 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 14:41:15,173 - INFO - Driver [/Users/test/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver] found in cache
+2025-02-14 14:42:16,428 - INFO - Update id=902095035 is handled. Duration 64359 ms by bot id=7745376176
+2025-02-14 14:42:36,787 - INFO - Update id=902095036 is not handled. Duration 3 ms by bot id=7745376176
+2025-02-14 14:42:50,010 - INFO - Update id=902095037 is handled. Duration 157 ms by bot id=7745376176
+2025-02-14 14:42:57,354 - INFO - Update id=902095038 is handled. Duration 269 ms by bot id=7745376176
+2025-02-14 14:42:58,596 - INFO - ====== WebDriver manager ======
+2025-02-14 14:42:59,065 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 14:42:59,548 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 14:43:01,205 - INFO - Driver [/Users/test/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver] found in cache
+2025-02-14 14:43:52,156 - INFO - Update id=902095039 is handled. Duration 53778 ms by bot id=7745376176
+2025-02-14 14:44:01,452 - INFO - Update id=902095040 is handled. Duration 221 ms by bot id=7745376176
+2025-02-14 14:44:08,700 - WARNING - Received SIGINT signal
+2025-02-14 14:44:08,708 - INFO - Polling stopped for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 14:44:08,710 - INFO - Polling stopped
+2025-02-14 19:55:16,041 - INFO - Start polling
+2025-02-14 19:55:16,644 - INFO - Run polling for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 19:55:19,158 - INFO - Update id=902095041 is handled. Duration 452 ms by bot id=7745376176
+2025-02-14 19:55:20,088 - INFO - ====== WebDriver manager ======
+2025-02-14 19:55:21,533 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 19:55:21,919 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 19:55:22,225 - INFO - Driver [/Users/test/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver] found in cache
+2025-02-14 19:56:20,044 - INFO - Пользователь 476439219 ожидает ввода 2FA-кода для модели Lalahoho988@gmail.com.
+2025-02-14 19:56:20,506 - INFO - Update id=902095042 is handled. Duration 60535 ms by bot id=7745376176
+2025-02-14 19:56:32,949 - INFO - Update id=902095043 is not handled. Duration 6 ms by bot id=7745376176
+2025-02-14 19:56:32,949 - ERROR - Cause exception while process update id=902095043 by bot id=7745376176
+KeyError: (476439219, '')
+Traceback (most recent call last):
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 56, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 146, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 141, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 166, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/Users/test/PycharmProjects/TelegramTestBot/app.py", line 296, in enter_2fa
+    email = user_states[(user_id, user_states[(user_id, "")]["email"])]["email"]
+                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^
+KeyError: (476439219, '')
+2025-02-14 19:58:20,000 - WARNING - Received SIGINT signal
+2025-02-14 19:58:20,169 - INFO - Polling stopped for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 19:58:20,172 - INFO - Polling stopped
+2025-02-14 19:58:55,210 - INFO - Start polling
+2025-02-14 19:58:56,219 - INFO - Run polling for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 19:58:58,161 - INFO - Update id=902095044 is handled. Duration 493 ms by bot id=7745376176
+2025-02-14 19:58:58,987 - INFO - Update id=902095045 is handled. Duration 142 ms by bot id=7745376176
+2025-02-14 19:59:00,686 - INFO - ====== WebDriver manager ======
+2025-02-14 19:59:01,311 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 19:59:01,582 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 19:59:01,807 - INFO - Driver [/Users/test/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver] found in cache
+2025-02-14 19:59:47,691 - INFO - Пользователь 476439219 ожидает ввода 2FA-кода для модели Lalahoho988@gmail.com.
+2025-02-14 19:59:51,361 - INFO - Update id=902095046 is handled. Duration 50786 ms by bot id=7745376176
+2025-02-14 20:00:04,004 - INFO - Update id=902095047 is not handled. Duration 3 ms by bot id=7745376176
+2025-02-14 20:03:28,186 - WARNING - Received SIGINT signal
+2025-02-14 20:03:28,198 - INFO - Polling stopped for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 20:03:28,200 - INFO - Polling stopped
+2025-02-14 20:03:39,486 - INFO - Start polling
+2025-02-14 20:03:39,747 - INFO - Run polling for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 20:03:44,867 - INFO - Update id=902095048 is handled. Duration 497 ms by bot id=7745376176
+2025-02-14 20:03:46,081 - INFO - Update id=902095049 is handled. Duration 205 ms by bot id=7745376176
+2025-02-14 20:03:48,652 - INFO - ====== WebDriver manager ======
+2025-02-14 20:03:49,184 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 20:03:49,464 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 20:03:49,690 - INFO - Driver [/Users/test/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver] found in cache
+2025-02-14 20:04:44,856 - INFO - Пользователь 476439219 ожидает ввода 2FA-кода для модели Lalahoho988@gmail.com.
+2025-02-14 20:04:45,191 - INFO - Update id=902095050 is handled. Duration 56664 ms by bot id=7745376176
+2025-02-14 20:05:03,458 - INFO - Update id=902095051 is not handled. Duration 5 ms by bot id=7745376176
+2025-02-14 20:08:24,907 - WARNING - Received SIGINT signal
+2025-02-14 20:08:24,928 - INFO - Polling stopped for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 20:08:24,948 - INFO - Polling stopped
+2025-02-14 22:49:49,257 - INFO - Start polling
+2025-02-14 22:49:49,574 - INFO - Run polling for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 22:49:49,997 - INFO - Update id=902095056 is handled. Duration 331 ms by bot id=7745376176
+2025-02-14 22:49:55,426 - INFO - Update id=902095057 is handled. Duration 367 ms by bot id=7745376176
+2025-02-14 22:49:57,474 - INFO - ====== WebDriver manager ======
+2025-02-14 22:49:58,161 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 22:49:59,596 - INFO - Get LATEST chromedriver version for google-chrome
+2025-02-14 22:49:59,875 - INFO - Driver [/Users/test/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver] found in cache
+2025-02-14 22:50:41,005 - INFO - Пользователь 476439219 ожидает ввода 2FA-кода для модели Lalahoho988@gmail.com.
+2025-02-14 22:50:41,494 - INFO - Update id=902095058 is handled. Duration 44990 ms by bot id=7745376176
+2025-02-14 22:51:05,704 - INFO - Update id=902095059 is not handled. Duration 5 ms by bot id=7745376176
+2025-02-14 23:00:00,589 - INFO - Update id=902095060 is handled. Duration 194 ms by bot id=7745376176
+2025-02-14 23:00:22,803 - WARNING - Received SIGINT signal
+2025-02-14 23:00:22,809 - INFO - Polling stopped for bot @parsingtelegramfansly_bot id=7745376176 - 'FanslyWorkingBot'
+2025-02-14 23:00:22,814 - INFO - Polling stopped
