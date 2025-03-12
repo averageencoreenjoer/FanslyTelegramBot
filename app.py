@@ -18,7 +18,7 @@ from contextlib import asynccontextmanager
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = "7745376176:AAH0q7LS3k_PCB9ZzWlxYyY9fS5eFPMAxMc"
+TOKEN = ""
 ACCOUNTS_FILE = "accounts.json"
 STATUS_FILE = "status.json"
 NOTIFICATIONS_FILE = "notifications.json"
@@ -180,7 +180,6 @@ active_sessions = {}
 user_lists = {}
 config = load_config()
 workers = load_workers()
-# Глобальный словарь для хранения активных сессий мониторинга
 
 
 def main_menu():
@@ -213,7 +212,7 @@ def admin_back_menu():
 def models_menu():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Запустить сессию"), KeyboardButton(text="Отключить сессию")],  # Добавлена кнопка
+            [KeyboardButton(text="Запустить сессию"), KeyboardButton(text="Отключить сессию")], 
             [KeyboardButton(text="Редактирование Нейросети")],
             [KeyboardButton(text="Вывести список моделей")],
             [KeyboardButton(text="🔙 Шаг назад")],
@@ -301,19 +300,18 @@ async def start_monitoring_for_admin(email, category, driver, chat_id):
             "username": accounts[email]["username"],
             "categories": {
                 category: {
-                    "chat_ids": []  # Не сохраняем chat_id админа
+                    "chat_ids": []  
                 }
             }
         }
     else:
         if category not in active_sessions_data[email]["categories"]:
             active_sessions_data[email]["categories"][category] = {
-                "chat_ids": []  # Не сохраняем chat_id админа
+                "chat_ids": [] 
             }
 
-    save_active_sessions(active_sessions_data)  # Сохраняем сессии
+    save_active_sessions(active_sessions_data)  
 
-    # Создаем задачу мониторинга и сохраняем driver в памяти
     task = asyncio.create_task(monitor_users(email, driver, chat_id, None, category))
     if email not in active_monitoring_sessions:
         active_monitoring_sessions[email] = {}
@@ -366,9 +364,9 @@ async def connect_user_to_monitoring(email, category, chat_id):
         if email not in notifications[chat_id_str]:
             notifications[chat_id_str][email] = {}
         if category not in notifications[chat_id_str][email]:
-            notifications[chat_id_str][email][category] = {"enabled": True}  # Уведомления включены по умолчанию
+            notifications[chat_id_str][email][category] = {"enabled": True}  
 
-        save_json(NOTIFICATIONS_FILE, notifications)  # Сохраняем изменения в notifications.json
+        save_json(NOTIFICATIONS_FILE, notifications)  
 
         await bot.send_message(chat_id, f"✅ Вы подключены к мониторингу модели {accounts[email]['username']} (Категория: {category}).", reply_markup=monitoring_menu(chat_id))
     else:
@@ -382,11 +380,10 @@ async def stop_monitoring(email, category, chat_id):
         if chat_id in active_sessions_data[email]["categories"][category]["chat_ids"]:
             active_sessions_data[email]["categories"][category]["chat_ids"].remove(chat_id)
 
-            # Обновляем chat_ids в активных сессиях
             if email in active_monitoring_sessions and category in active_monitoring_sessions[email]:
                 active_monitoring_sessions[email][category]["chat_ids"].remove(chat_id)
 
-            save_active_sessions(active_sessions_data)  # Сохраняем обновленные данные
+            save_active_sessions(active_sessions_data) 
             await bot.send_message(chat_id, f"❌ Вы отключены от мониторинга модели {accounts[email]['username']} (Категория: {category}).")
         else:
             await bot.send_message(chat_id, f"❌ Вы не подключены к мониторингу модели {accounts[email]['username']} (Категория: {category}).")
@@ -433,7 +430,7 @@ async def select_section(message: types.Message):
         keyboard=[
             [KeyboardButton(text="Модели")],
             [KeyboardButton(text="Работники")],
-            [KeyboardButton(text="🔙 Назад (Админ)")]  # Используем админскую кнопку
+            [KeyboardButton(text="🔙 Назад (Админ)")] 
         ],
         resize_keyboard=True
     ))
@@ -525,7 +522,6 @@ async def stop_session_handler(message: types.Message):
         await message.answer("Нет активных сессий для отключения.", reply_markup=models_menu())
         return
 
-    # Формируем список активных сессий
     sessions_list = []
     for email, data in active_sessions_data.items():
         username = data["username"]
@@ -536,7 +532,6 @@ async def stop_session_handler(message: types.Message):
         await message.answer("Нет активных сессий для отключения.", reply_markup=models_menu())
         return
 
-    # Создаем клавиатуру с активными сессиями
     keyboard = [
         [KeyboardButton(text=f"❌ Отключить {session}")] for session in sessions_list
     ]
@@ -555,26 +550,20 @@ async def stop_selected_session(message: types.Message):
 
     active_sessions_data = load_active_sessions()
 
-    # Ищем выбранную сессию
     for email, data in active_sessions_data.items():
         username = data["username"]
         for category, session_data in data["categories"].items():
             if f"{username} ({category})" == selected_session:
-                # Отключаем сессию
                 if email in active_monitoring_sessions and category in active_monitoring_sessions[email]:
-                    # Останавливаем задачу мониторинга
                     active_monitoring_sessions[email][category]["task"].cancel()
-                    # Закрываем драйвер
                     active_monitoring_sessions[email][category]["driver"].quit()
-                    # Удаляем сессию из активных
                     del active_monitoring_sessions[email][category]
 
-                # Удаляем сессию из сохраненных данных
                 del active_sessions_data[email]["categories"][category]
                 if not active_sessions_data[email]["categories"]:
                     del active_sessions_data[email]
 
-                save_active_sessions(active_sessions_data)  # Сохраняем изменения
+                save_active_sessions(active_sessions_data)
                 await message.answer(f"✅ Сессия для {selected_session} успешно отключена.", reply_markup=models_menu())
                 return
 
@@ -596,7 +585,7 @@ async def confirm_delete_worker(message: types.Message):
 async def show_models(message: types.Message):
     user_id = message.from_user.id
     if user_id in user_states and user_states[user_id].get("is_admin", False):
-        user_states[user_id]["is_admin"] = True  # Сохраняем флаг администратора
+        user_states[user_id]["is_admin"] = True 
 
     active_sessions_data = load_active_sessions()
 
@@ -609,10 +598,8 @@ async def show_models(message: types.Message):
         username = account["username"]
         categories = ["Subscribers", "VIPs", "Followers", "All"]
 
-        # Формируем строку с категориями и их статусами
         category_statuses = []
         for category in categories:
-            # Проверяем, запущен ли мониторинг для категории
             is_active = False
             if email in active_sessions_data and category in active_sessions_data[email]["categories"]:
                 is_active = True
@@ -621,7 +608,6 @@ async def show_models(message: types.Message):
 
         models_list.append(f"👤 {username}\n" + "\n".join(category_statuses))
 
-    # Формируем финальное сообщение
     response = "Список моделей и их категорий:\n\n" + "\n\n".join(models_list)
     await message.answer(response, reply_markup=models_menu())
 
@@ -641,7 +627,7 @@ async def check_password(message: types.Message):
     login = user_states[user_id]["login"]
 
     if login == config["admin_login"] and entered_password == config["admin_password"]:
-        user_states[user_id]["is_admin"] = True  # Устанавливаем флаг администратора
+        user_states[user_id]["is_admin"] = True 
         await message.answer("Добро пожаловать в админку!", reply_markup=admin_main_menu())
     elif login in workers and workers[login]["password"] == entered_password:
         await message.answer("Добро пожаловать в меню работника!", reply_markup=main_menu())
@@ -784,7 +770,7 @@ async def start_session_from_admin(message: types.Message):
         await message.answer("⚠️ Нет добавленных моделей. Добавьте хотя бы одну!", reply_markup=admin_main_menu())
         return
 
-    user_states[user_id] = {"stage": "selecting_model_for_session", "is_admin": True}  # Сохраняем флаг администратора
+    user_states[user_id] = {"stage": "selecting_model_for_session", "is_admin": True} 
     kb = ReplyKeyboardMarkup(
         keyboard=[[KeyboardButton(text=account["username"])] for account in accounts.values()] + [
             [KeyboardButton(text="🏠 Главное меню")]],
@@ -833,7 +819,7 @@ async def handle_model_selection_for_session(message: types.Message):
     if not twofa_needed:
         await start_monitoring_for_admin(email, "All", driver, chat_id)
     else:
-        user_states[user_id] = {"stage": "waiting_for_2fa", "email": email, "driver": driver, "is_admin": True}  # Сохраняем флаг администратора
+        user_states[user_id] = {"stage": "waiting_for_2fa", "email": email, "driver": driver, "is_admin": True} 
         await message.answer(f"🔐 Введите 2FA-код для модели **{selected_username}**:", reply_markup=back_menu(), parse_mode="Markdown")
 
 @dp.message(lambda message: message.text == "Удалить модель")
@@ -996,7 +982,6 @@ async def select_monitoring_section(message: types.Message):
                 "category": section
             })
 
-            # Используем ту же логику сохранения, что и в start_monitoring_for_admin
             active_sessions_data = load_active_sessions()
 
             if email not in active_sessions_data:
@@ -1016,9 +1001,8 @@ async def select_monitoring_section(message: types.Message):
                 else:
                     active_sessions_data[email]["categories"][section]["chat_ids"].append()
 
-            save_active_sessions(active_sessions_data)  # Сохраняем сессии
+            save_active_sessions(active_sessions_data) 
 
-            # Создаем задачу мониторинга и сохраняем driver в памяти
             task = asyncio.create_task(monitor_users(email, driver, chat_id, user_id, section))
             if email not in active_monitoring_sessions:
                 active_monitoring_sessions[email] = {}
@@ -1049,10 +1033,8 @@ async def show_online_users(message: types.Message):
     user_id = message.from_user.id
     chat_id = str(message.chat.id)
 
-    # Загружаем активные сессии
     active_sessions_data = load_active_sessions()
 
-    # Проверяем, к каким моделям и категориям подключен пользователь
     user_sessions = []
     for email, data in active_sessions_data.items():
         for category, session_data in data.get("categories", {}).items():
@@ -1072,10 +1054,8 @@ async def show_online_users(message: types.Message):
             email = session["email"]
             category = session["category"]
 
-            # Загружаем статусы чатов для данной модели и категории
             chat_statuses = load_chat_statuses(email, category)
 
-            # Фильтруем онлайн-пользователей
             online_users.extend([
                 f"🔹 {chat} — 🟢 <b>ОНЛАЙН</b> (Модель: {accounts[email]['username']}, Категория: {category})"
                 for chat, user_data in chat_statuses.items() if user_data.get("is_online", False)
@@ -1085,11 +1065,9 @@ async def show_online_users(message: types.Message):
             await message.answer("📭 В данный момент никого нет в сети.")
             return
 
-        # Формируем сообщение с онлайн-пользователями
         header = f"📜 <b>Список пользователей онлайн:</b>\n"
         response = header + "\n".join(online_users)
 
-        # Разбиваем сообщение на части, если оно слишком длинное
         message_parts = split_message(response)
 
         for part in message_parts:
@@ -1179,7 +1157,6 @@ async def toggle_notifications(message: types.Message):
     username = button_text.split("для ")[1].split(" (")[0]
     category = button_text.split(" (")[1].rstrip(")")
 
-    # Находим email модели по username
     email = next(email for email, acc in accounts.items() if acc["username"] == username)
 
     if chat_id not in notifications:
@@ -1189,7 +1166,6 @@ async def toggle_notifications(message: types.Message):
     if category not in notifications[chat_id][email]:
         notifications[chat_id][email][category] = {"enabled": True}
 
-    # Переключаем состояние уведомлений
     is_enabled = notifications[chat_id][email][category]["enabled"]
     notifications[chat_id][email][category]["enabled"] = not is_enabled
     save_json(NOTIFICATIONS_FILE, notifications)
@@ -1208,10 +1184,8 @@ async def remove_session(message: types.Message):
     username = button_text.replace("❌ Удалить ", "").split(" (")[0]
     category = button_text.split(" (")[1].rstrip(")")
 
-    # Находим email модели по username
     email = next(email for email, acc in accounts.items() if acc["username"] == username)
 
-    # Удаляем пользователя из активных сессий
     active_sessions_data = load_active_sessions()
 
     if email in active_sessions_data and category in active_sessions_data[email].get("categories", {}):
@@ -1263,8 +1237,7 @@ async def add_model_to_session(message: types.Message):
     if not active_sessions_data:
         await message.answer("⚠️ Нет запущенных моделей для подключения.", reply_markup=monitoring_menu(user_id))
         return
-
-    # Формируем список моделей, к которым пользователь еще не подключен
+        
     available_models = []
     for email, data in active_sessions_data.items():
         username = data["username"]
@@ -1276,7 +1249,6 @@ async def add_model_to_session(message: types.Message):
         await message.answer("⚠️ Вы уже подключены ко всем запущенным моделям.", reply_markup=monitoring_menu(user_id))
         return
 
-    # Создаем клавиатуру с доступными моделями
     keyboard = [[KeyboardButton(text=model)] for model in available_models]
     keyboard.append([KeyboardButton(text="🔙 Назад")])
 
@@ -1286,7 +1258,7 @@ async def add_model_to_session(message: types.Message):
     )
 
 
-@dp.message(lambda message: message.text.endswith(")"))  # Обработка выбора модели
+@dp.message(lambda message: message.text.endswith(")")) 
 async def handle_model_selection_for_connection(message: types.Message):
     user_id = message.from_user.id
     chat_id = str(message.chat.id)
@@ -1295,10 +1267,8 @@ async def handle_model_selection_for_connection(message: types.Message):
     username = selected_text.split(" (")[0]
     category = selected_text.split(" (")[1].rstrip(")")
 
-    # Находим email модели по username
     email = next(email for email, acc in accounts.items() if acc["username"] == username)
 
-    # Подключаем пользователя к выбранной модели и категории
     await connect_user_to_monitoring(email, category, chat_id)
 
 
@@ -1325,7 +1295,6 @@ async def handle_add_model_to_session(message: types.Message):
 
 async def login_to_fansly(username, password):
     options = Options()
-    # options.add_argument("--headless")  # Включите headless, если не требуется визуальное отображение
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920x1080")
     options.add_argument("--no-sandbox")
@@ -1334,7 +1303,6 @@ async def login_to_fansly(username, password):
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     try:
-        # Переход на страницу Fansly
         driver.get("https://fansly.com/")
         logging.info("Открыта страница Fansly.")
 
@@ -1347,41 +1315,32 @@ async def login_to_fansly(username, password):
         except NoSuchElementException:
             logging.info("Всплывающее окно не найдено, продолжаем...")
 
-        # Ожидание появления кнопки "Login" и клик по ней
         try:
-            # Ожидание появления кнопки
             login_button = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'btn solid-blue')][2]"))
             )
-            # Кликаем
             login_button.click()
             print("Кнопка Login найдена и нажата!")
 
         except Exception as e:
             print("Ошибка: Кнопка Login не найдена или недоступна.", e)
 
-        # Ожидание появления поля ввода username/email
         username_field = WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.ID, "fansly_login"))
         )
         username_field.send_keys(username)
         logging.info("Введен username/email.")
 
-        # Ожидание появления поля ввода пароля
         password_field = WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.ID, "fansly_password"))
         )
         password_field.send_keys(password)
         logging.info("Введен пароль.")
-
-        # Нажатие Enter для отправки формы
         password_field.send_keys(Keys.RETURN)
         logging.info("Форма входа отправлена.")
 
-        # Ожидание завершения входа
         await asyncio.sleep(5)
 
-        # Проверка на необходимость 2FA
         if "twofa" in driver.page_source:
             logging.info("Требуется 2FA.")
             return True, driver
