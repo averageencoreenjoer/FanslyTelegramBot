@@ -1,83 +1,83 @@
-# Мониторинг бот для Fansly
+# Monitoring Bot for Fansly
 
-Бот для мониторинга активности пользователей на платформе Fansly. Бот позволяет отслеживать онлайн-статус пользователей, отправлять уведомления о появлении в сети и управлять сессиями мониторинга через Telegram.
+A bot for monitoring user activity on the Fansly platform. The bot allows you to track the online status of users, send notifications about their appearance online, and manage monitoring sessions via Telegram.
 
-## Функциональность
+## Functionality
 
-- **Мониторинг онлайн-статуса**: Бот отслеживает онлайн-статус пользователей в различных категориях (Subscribers, VIPs, Followers, All).
-- **Уведомления**: Бот отправляет уведомления в Telegram, когда пользователь появляется в сети.
-- **Управление сессиями**: Возможность запуска, остановки и редактирования сессий мониторинга.
-- **Многопользовательский режим**: Поддержка нескольких моделей и категорий для мониторинга.
-- **Административный интерфейс**: Управление моделями, работниками и настройками бота через Telegram.
+- **Monitoring Online Status**: The bot tracks the online status of users in various categories (Subscribers, VIPs, Followers, All).
+- **Notifications**: The bot sends notifications to Telegram when a user appears online.
+- **Session Management**: Ability to start, stop, and edit monitoring sessions.
+- **Multi-User**: Support for multiple models and categories for monitoring.
+- **Administrative Interface**: Manage models, workers, and bot settings via Telegram.
 
-## Установка и настройка
+## Installation and setup
 
-### Требования
+### Requirements
 
-- Python 3.8 или выше
-- Установленный Git
-- Аккаунт на [Fansly](https://fansly.com/)
-- Токен Telegram Bot (получить можно у [BotFather](https://core.telegram.org/bots#botfather))
+- Python 3.8 or higher
+- Installed Git
+- [Fansly](https://fansly.com/) account
+- Telegram Bot token (can be obtained from [BotFather](https://core.telegram.org/bots#botfather))
 
-### Установка
+### Installation
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
    ```bash
    git clone https://github.com/averageencoreenjoer/FanslyTelegramBot.git
    cd FanslyTelegramBot
-2. Установите зависимости:
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
-3. Создайте файл config.json в корневой директории проекта и заполните его следующим образом:
+3. Create a config.json file in the root directory of the project and fill it with the following:
    ```bash
    {
-   "admin_login": "ваш_логин",
-   "admin_password": "ваш_пароль"
+      "admin_login": "your_login",
+      "admin_password": "your_password"
    }
-4. Запустите бота:
+4. Run bot:
    ```bash
    python app.py
 
-## Использование
+## Usage
 
-### Команды
+### Commands
 
-- **/start**: Запуск бота и отображение главного меню.
-- **Приступить к работе**: Начать мониторинг выбранной модели.
-- **Редактор учетных записей**: Управление аккаунтами моделей (добавление, удаление).
-- **Текущий онлайн**: Показать список пользователей, которые сейчас в сети.
-- **Остановить мониторинг**: Приостановить уведомления.
-- **Восстановить мониторинг**: Возобновить уведомления.
+- **/start**: Start the bot and display the main menu.
+- **Get Started**: Start monitoring the selected model.
+- **Account Editor**: Manage model accounts (add, delete).
+- **Currently Online**: Show a list of users who are currently online.
+- **Stop Monitoring**: Pause notifications.
+- **Resume Monitoring**: Resume notifications.
 
-### Добавление модели
+### Adding a Model
 
-1. Перейдите в раздел **Редактор учетных записей**.
-2. Выберите **Добавить модель**.
-3. Введите email, пароль и ник модели.
-4. После добавления аккаунта выберите модель для мониторинга.
+1. Go to the **Account Editor** section.
+2. Select **Add Model**.
+3. Enter the email, password, and nickname of the model.
+4. After adding the account, select the model to monitor.
 
-### Мониторинг
+### Monitoring
 
-1. Выберите модель из списка.
-2. Выберите категорию для мониторинга: Subscribers, VIPs, Followers или All.
-3. Бот начнет отслеживать онлайн-статус пользователей и уведомлять вас.
+1. Select a model from the list.
+2. Select a category to monitor: Subscribers, VIPs, Followers, or All.
+3. The bot will start monitoring the online status of users and notify you.
 
-## Примеры использования
+## Usage examples
 
-- **Мониторинг подписчиков**: Узнайте, когда ваши подписчики появляются в сети.
-- **Управление несколькими моделями**: Добавьте несколько аккаунтов моделей и управляйте ими через одного бота.
-- **Настройка уведомлений**: Включите или отключите уведомления для каждой модели или категории.
+- **Monitor followers**: Know when your followers are online.
+- **Manage multiple models**: Add multiple model accounts and manage them through one bot.
+- **Configure notifications**: Enable or disable notifications for each model or category.
 
-## Лицензия
+## License
 
-Этот проект распространяется под лицензией MIT. Подробнее см. в файле [LICENSE](LICENSE).
+This project is distributed under the MIT license. For more information, see the [LICENSE](LICENSE) file.
 
-## Поддержка
+## Support
 
-Если у вас возникли вопросы или проблемы, создайте issue в репозитории или свяжитесь со мной через Telegram.
+If you have any questions or problems, create an issue in the repository or contact me via Telegram.
 
 ---
 
-**Автор**: polputi inc.  
-**GitHub**: https://github.com/averageencoreenjoer  
+**Author**: polputi inc.
+**GitHub**: https://github.com/averageencoreenjoer
 **Telegram**: @soprettymindset
