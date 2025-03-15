@@ -1351,12 +1351,17 @@ async def login_to_fansly(username, password):
 
         try:
             await asyncio.sleep(5)
-            modal = driver.find_element(By.CLASS_NAME, "xdModal")
-            driver.execute_script("arguments[0].remove();", modal)
-            logging.info("Всплывающее окно закрыто!")
+            modal_content = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "div.modal-content"))
+            )
+            logging.info("Модальное окно с предупреждением найдено.")
+
+            enter_button = modal_content.find_element(By.CSS_SELECTOR, "div.btn.large.solid-green.flex-1")
+            enter_button.click()
+            logging.info("Кнопка 'Enter' нажата.")
             await asyncio.sleep(2)
-        except NoSuchElementException:
-            logging.info("Всплывающее окно не найдено, продолжаем...")
+        except Exception as e:
+            logging.info("Модальное окно с предупреждением не найдено или кнопка 'Enter' недоступна.", e)
 
         try:
             await asyncio.sleep(5)
