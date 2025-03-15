@@ -215,10 +215,11 @@ def admin_back_menu():
 def models_menu():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Запустить сессию"), KeyboardButton(text="Отключить сессию")],  # Добавлена кнопка
+            [KeyboardButton(text="Запустить сессию"), KeyboardButton(text="Отключить сессию")],
             [KeyboardButton(text="Редактирование Нейросети")],
             [KeyboardButton(text="Вывести список моделей")],
-            [KeyboardButton(text="🔙 Шаг назад")],
+            [KeyboardButton(text="Добавить модель"), KeyboardButton(text="Удалить модель")],
+            [KeyboardButton(text="🔙 Назад (Админ)")],
             [KeyboardButton(text="Выйти из аккаунта")]
         ],
         resize_keyboard=True
@@ -266,6 +267,7 @@ def workers_menu():
         keyboard=[
             [KeyboardButton(text="Добавить работника")],
             [KeyboardButton(text="Удалить работника")],
+            [KeyboardButton(text="Вывести список работников")],
             [KeyboardButton(text="🔙 Назад (Работник)")],
             [KeyboardButton(text="Выйти из аккаунта")]
         ],
@@ -446,8 +448,13 @@ async def show_workers(message: types.Message):
         await message.answer("Нет добавленных работников.", reply_markup=admin_main_menu())
         return
 
-    workers_list = [f"{login}" for login in workers.keys()]
-    await message.answer("Список работников:\n" + "\n".join(workers_list), reply_markup=workers_menu())
+    workers_list = []
+    for login, data in workers.items():
+        password = data.get("password", "не указан")
+        workers_list.append(f"Логин: {login}\nПароль: {password}\n")
+
+    response = "Список работников:\n\n" + "\n".join(workers_list)
+    await message.answer(response, reply_markup=workers_menu())
 
 
 @dp.message(lambda message: message.text == "Добавить работника")
@@ -460,6 +467,12 @@ async def add_worker(message: types.Message):
 @dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id]["stage"] == "waiting_for_worker_login")
 async def get_worker_login(message: types.Message):
     user_id = message.from_user.id
+    login = message.text
+
+    if login in workers:
+        await message.answer("❌ Работник с таким логином уже существует. Введите другой логин.")
+        return
+
     user_states[user_id]["login"] = message.text
     user_states[user_id]["stage"] = "waiting_for_worker_password"
     await message.answer("Введите пароль нового работника:")
@@ -493,12 +506,32 @@ async def worker_go_back(message: types.Message):
         await message.answer("Вы уже в главном меню.", reply_markup=admin_main_menu())
 
 
+@dp.message(lambda message: message.text == "Вывести список работников")
+async def show_workers_list(message: types.Message):
+    if not workers:
+        await message.answer("Нет добавленных работников.", reply_markup=workers_menu())
+        return
+
+    workers_list = []
+    for login, data in workers.items():
+        password = data.get("password", "не указан")
+        workers_list.append(f"Логин: {login}\nПароль: {password}\n")
+
+    response = "Список работников:\n\n" + "\n".join(workers_list)
+    await message.answer(response, reply_markup=workers_menu())
+
+
 @dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id]["stage"] == "waiting_for_worker_password")
 async def get_worker_password(message: types.Message):
     user_id = message.from_user.id
     login = user_states[user_id]["login"]
     password = message.text
-    workers[login] = {"password": password}
+
+    workers[login] = {
+        "login": login,
+        "password": password
+    }
+
     save_json(WORKERS_FILE, workers)
     del user_states[user_id]
     await message.answer(f"✅ Работник {login} успешно добавлен!", reply_markup=workers_menu())
@@ -831,7 +864,7 @@ async def handle_model_selection_for_session(message: types.Message):
 @dp.message(lambda message: message.text == "Удалить модель")
 async def delete_model(message: types.Message):
     if not accounts:
-        await message.answer("⚠️ Нет добавленных моделей.", reply_markup=main_menu())
+        await message.answer("⚠️ Нет добавленных моделей.", reply_markup=models_menu())
         return
 
     user_id = message.from_user.id
@@ -857,14 +890,14 @@ async def confirm_delete_model(message: types.Message):
         import shutil
         shutil.rmtree(account_folder)
 
-    await message.answer(f"✅ Модель **{selected_username}** успешно удалена!", reply_markup=main_menu())
+    await message.answer(f"✅ Модель **{selected_username}** успешно удалена!", reply_markup=models_menu())
 
 
 @dp.message(lambda message: message.text == "Добавить модель")
 async def add_model(message: types.Message):
     user_id = message.from_user.id
     user_states[user_id] = {"stage": "waiting_for_model_email"}
-    await message.answer("Введите email модели:", reply_markup=back_menu())
+    await message.answer("Введите email модели:", reply_markup=admin_back_menu())
 
 
 @dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id]["stage"] == "waiting_for_model_email")
@@ -872,7 +905,7 @@ async def get_model_email(message: types.Message):
     user_id = message.from_user.id
     user_states[user_id]["email"] = message.text
     user_states[user_id]["stage"] = "waiting_for_model_password"
-    await message.answer("Введите пароль модели:", reply_markup=back_menu())
+    await message.answer("Введите пароль модели:", reply_markup=admin_back_menu())
 
 
 @dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id]["stage"] == "waiting_for_model_password")
@@ -880,7 +913,7 @@ async def get_model_password(message: types.Message):
     user_id = message.from_user.id
     user_states[user_id]["password"] = message.text
     user_states[user_id]["stage"] = "waiting_for_model_username"
-    await message.answer("Введите ник модели:", reply_markup=back_menu())
+    await message.answer("Введите ник модели:", reply_markup=admin_back_menu())
 
 
 @dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id]["stage"] == "waiting_for_model_username")
@@ -895,7 +928,7 @@ async def get_model_username(message: types.Message):
     }
     save_json(ACCOUNTS_FILE, accounts)
     del user_states[user_id]
-    await message.answer("✅ Аккаунт успешно добавлен!", reply_markup=main_menu())
+    await message.answer("✅ Аккаунт успешно добавлен!", reply_markup=models_menu())
 
 
 @dp.message(lambda message: message.text == "Приступить к работе")
