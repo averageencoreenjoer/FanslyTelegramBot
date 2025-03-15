@@ -923,7 +923,8 @@ async def monitor_model(message: types.Message):
     await connect_user_to_monitoring(email, "All", chat_id)
 
 
-@dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id]["stage"] == "waiting_for_2fa")
+@dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id][
+    "stage"] == "waiting_for_2fa")
 async def enter_2fa(message: types.Message):
     try:
         user_id = message.from_user.id
@@ -934,6 +935,10 @@ async def enter_2fa(message: types.Message):
             logging.info(f"Получен 2FA-код от пользователя {user_id}: {twofa_code}")
 
             twofa_field = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "fansly_twofa")))
+
+            # Очистка поля перед вводом нового кода
+            twofa_field.clear()
+
             twofa_field.send_keys(twofa_code)
             twofa_field.send_keys(Keys.RETURN)
 
@@ -946,7 +951,7 @@ async def enter_2fa(message: types.Message):
 
     except Exception as e:
         logging.error(f"Ошибка при вводе 2FA: {e}")
-        await message.answer("❌ Произошла ошибка при вводе 2FA. Попробуйте еще раз.")
+        await message.answer("❌ Произошла ошибка при вводе 2FA. Попробуйте еще раз.", reply_markup=types.ReplyKeyboardRemove())
 
 
 @dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id]["stage"] == "waiting_for_monitoring_section")
@@ -1345,7 +1350,7 @@ async def login_to_fansly(username, password):
         password_field.send_keys(Keys.RETURN)
         logging.info("Форма входа отправлена.")
 
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
 
         if "twofa" in driver.page_source:
             logging.info("Требуется 2FA.")
