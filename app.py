@@ -934,6 +934,9 @@ async def enter_2fa(message: types.Message):
             logging.info(f"Получен 2FA-код от пользователя {user_id}: {twofa_code}")
 
             twofa_field = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "fansly_twofa")))
+
+            twofa_field.clear()
+            
             twofa_field.send_keys(twofa_code)
             twofa_field.send_keys(Keys.RETURN)
 
@@ -946,7 +949,7 @@ async def enter_2fa(message: types.Message):
 
     except Exception as e:
         logging.error(f"Ошибка при вводе 2FA: {e}")
-        await message.answer("❌ Произошла ошибка при вводе 2FA. Попробуйте еще раз.")
+        await message.answer("❌ Произошла ошибка при вводе 2FA. Попробуйте еще раз.", reply_markup=types.ReplyKeyboardRemove())
 
 
 @dp.message(lambda message: message.from_user.id in user_states and user_states[message.from_user.id]["stage"] == "waiting_for_monitoring_section")
