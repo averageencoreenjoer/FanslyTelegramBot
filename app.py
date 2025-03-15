@@ -1347,6 +1347,7 @@ async def login_to_fansly(username, password):
 
     try:
         driver.get("https://fansly.com/")
+        driver.set_window_size(1200, 800)
         logging.info("Открыта страница Fansly.")
 
         try:
