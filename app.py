@@ -1350,7 +1350,7 @@ async def login_to_fansly(username, password):
         logging.info("Открыта страница Fansly.")
 
         try:
-            await asyncio.sleep(2)
+            await asyncio.sleep(5)
             modal = driver.find_element(By.CLASS_NAME, "xdModal")
             driver.execute_script("arguments[0].remove();", modal)
             logging.info("Всплывающее окно закрыто!")
