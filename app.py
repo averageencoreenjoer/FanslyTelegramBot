@@ -1359,6 +1359,7 @@ async def login_to_fansly(username, password):
             logging.info("Всплывающее окно не найдено, продолжаем...")
 
         try:
+            await asyncio.sleep(5)
             login_button = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'btn solid-blue')][2]"))
             )
