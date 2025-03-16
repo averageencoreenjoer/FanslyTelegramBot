@@ -1442,8 +1442,41 @@ async def get_chat_statuses(driver, email, category):
     max_attempts = 40
     attempt = 0
 
+    # Сначала собираем данные о пользователях в видимой области
+    users = driver.find_elements(By.CLASS_NAME, "message")
+    for user in users:
+        try:
+            username = user.find_element(By.CLASS_NAME, "display-name").text
+
+            user_link_element = user.find_element(By.CLASS_NAME, "username-wrapper")
+            user_link = user_link_element.get_attribute("href")
+
+            user_username = user_link.split("/")[-1]
+            if user_username.startswith("@"):
+                user_username = user_username[1:]
+
+            if username not in unique_users:
+                unique_users.add(username)
+                online_indicator = user.find_elements(By.CLASS_NAME, "online-indicator")
+
+                is_online = False
+                if online_indicator:
+                    status_classes = online_indicator[0].get_attribute("class")
+                    is_online = "available" in status_classes or "away" in status_classes
+
+                all_chat_statuses[username] = {
+                    "is_online": is_online,
+                    "username": user_username
+                }
+        except Exception as e:
+            logging.error(f"Ошибка при обработке пользователя: {e}")
+            continue
+
+    # Затем начинаем прокрутку и сбор данных
     while attempt < max_attempts:
         logging.info(f"🔄 Шаг {attempt + 1}: Прокрутка списка пользователей для {accounts[email]['username']} {category}...")
+        driver.execute_script(f"arguments[0].scrollTop += {scroll_step};", chat_container)
+        await asyncio.sleep(5)
 
         users = driver.find_elements(By.CLASS_NAME, "message")
 
@@ -1475,9 +1508,6 @@ async def get_chat_statuses(driver, email, category):
                 logging.error(f"Ошибка при обработке пользователя: {e}")
                 continue
 
-        driver.execute_script(f"arguments[0].scrollTop += {scroll_step};", chat_container)
-        await asyncio.sleep(5)
-        
         save_to_json(all_chat_statuses, email, category, filename=f"chat_statuses_page_{attempt + 1}.json")
         logging.info(f"📂 Данные сохранены в файл chat_statuses_page_{attempt + 1}.json для {accounts[email]['username']} {category}")
 
