@@ -1444,8 +1444,6 @@ async def get_chat_statuses(driver, email, category):
 
     while attempt < max_attempts:
         logging.info(f"🔄 Шаг {attempt + 1}: Прокрутка списка пользователей для {accounts[email]['username']} {category}...")
-        driver.execute_script(f"arguments[0].scrollTop += {scroll_step};", chat_container)
-        await asyncio.sleep(5)
 
         users = driver.find_elements(By.CLASS_NAME, "message")
 
@@ -1477,6 +1475,9 @@ async def get_chat_statuses(driver, email, category):
                 logging.error(f"Ошибка при обработке пользователя: {e}")
                 continue
 
+        driver.execute_script(f"arguments[0].scrollTop += {scroll_step};", chat_container)
+        await asyncio.sleep(5)
+        
         save_to_json(all_chat_statuses, email, category, filename=f"chat_statuses_page_{attempt + 1}.json")
         logging.info(f"📂 Данные сохранены в файл chat_statuses_page_{attempt + 1}.json для {accounts[email]['username']} {category}")
 
