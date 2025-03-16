@@ -1048,7 +1048,14 @@ async def select_monitoring_section(message: types.Message):
 
             save_active_sessions(active_sessions_data)
 
-            task = asyncio.create_task(monitor_users(email, driver, chat_id, user_id, section))
+            await message.answer(f"✅ Запускаем мониторинг раздела {section}...", reply_markup=models_menu())
+            monitoring_active[user_id] = True
+            user_drivers[user_id] = driver
+
+            user_states.pop(user_id, None)
+
+            task = asyncio.create_task(
+                monitor_users(email, driver, message.chat.id, user_id, section))
             if email not in active_monitoring_sessions:
                 active_monitoring_sessions[email] = {}
             if section not in active_monitoring_sessions[email]:
@@ -1057,14 +1064,6 @@ async def select_monitoring_section(message: types.Message):
                     "task": task,
                     "chat_ids": active_sessions_data[email]["categories"][section]["chat_ids"]
                 }
-
-            await message.answer(f"✅ Запускаем мониторинг раздела {section}...", reply_markup=models_menu())
-            monitoring_active[user_id] = True
-            user_drivers[user_id] = driver
-
-            user_states.pop(user_id, None)
-
-            asyncio.create_task(monitor_users(email, driver, message.chat.id, user_id, section))
         else:
             await message.answer("❌ Неизвестный раздел. Пожалуйста, выберите раздел из меню.", reply_markup=models_menu())
 
