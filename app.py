@@ -1407,13 +1407,14 @@ async def login_to_fansly(username, password):
 
 async def get_chat_statuses(driver, email, category):
     driver.get("https://fansly.com/messages")
-    await asyncio.sleep(2)
+    await asyncio.sleep(5)
+    driver.set_window_size(1200, 800)
 
     try:
         modal = driver.find_element(By.CLASS_NAME, "xdModal")
         driver.execute_script("arguments[0].remove();", modal)
         logging.info("Всплывающее окно закрыто!")
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
     except NoSuchElementException:
         logging.info("Всплывающее окно не найдено, продолжаем...")
 
@@ -1423,7 +1424,7 @@ async def get_chat_statuses(driver, email, category):
                 (By.XPATH, f"//div[contains(@class, 'bubble')]/xd-localization-string[contains(text(), '{category}')]"))
         )
         category_button.click()
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
     except Exception as e:
         logging.error(f"⚠️ Ошибка при нажатии на кнопку '{category}': {e}")
         return {}, {}
@@ -1442,7 +1443,6 @@ async def get_chat_statuses(driver, email, category):
     max_attempts = 40
     attempt = 0
 
-    # Сначала собираем данные о пользователях в видимой области
     users = driver.find_elements(By.CLASS_NAME, "message")
     for user in users:
         try:
@@ -1471,6 +1471,10 @@ async def get_chat_statuses(driver, email, category):
         except Exception as e:
             logging.error(f"Ошибка при обработке пользователя: {e}")
             continue
+
+    save_to_json(all_chat_statuses, email, category, filename=f"chat_statuses_page_initial.json")
+    logging.info(
+        f"📂 Данные сохранены в файл chat_statuses_page_initial.json для {accounts[email]['username']} {category}")
 
     # Затем начинаем прокрутку и сбор данных
     while attempt < max_attempts:
