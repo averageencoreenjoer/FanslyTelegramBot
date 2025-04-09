@@ -1342,10 +1342,14 @@ async def login_to_fansly(username, password):
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--log-level=3")
+    
+    # Явно указываем пути к chromedriver и chromium
     service = Service(
-        executable_path='/usr/lib/chromedriver',  # Путь к chromedriver
-        chrome_binary='/usr/bin/chromium-browser'  # Путь к исполняемому файлу Chromium
+        executable_path='/usr/bin/chromedriver',  # Путь к chromedriver
     )
+    
+    # Указываем путь к исполняемому файлу Chromium
+    options.binary_location = '/usr/bin/chromium-browser'
     
     driver = webdriver.Chrome(service=service, options=options)
 
