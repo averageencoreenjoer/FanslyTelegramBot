@@ -17,7 +17,7 @@ from contextlib import asynccontextmanager
 
 logging.basicConfig(level=logging.INFO)
 
-TOKEN = "7745376176:AAH0q7LS3k_PCB9ZzWlxYyY9fS5eFPMAxMc"
+TOKEN = "8124092472:AAFb5G_JplnZr8SE8lkgJ5qahU4yFbR5RfU"
 ACCOUNTS_FILE = "accounts.json"
 STATUS_FILE = "status.json"
 NOTIFICATIONS_FILE = "notifications.json"
