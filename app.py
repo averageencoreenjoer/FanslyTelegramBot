@@ -6,8 +6,9 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from selenium import webdriver
-from selenium.webdriver.chromium.options import ChromiumOptions
-from selenium.webdriver.chromium.service import ChromiumService
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -1334,17 +1335,19 @@ async def handle_add_model_to_session(message: types.Message):
 
 
 async def login_to_fansly(username, password):
-    options = ChromiumOptions()
+    options = Options()
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920x1080")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--log-level=3")
-    driver = webdriver.Chromium(
-        service=ChromiumService('/usr/bin/chromium-browser'),
-        options=options
+    service = Service(
+        executable_path='/usr/lib/chromedriver',  # Путь к chromedriver
+        chrome_binary='/usr/bin/chromium-browser'  # Путь к исполняемому файлу Chromium
     )
+    
+    driver = webdriver.Chrome(service=service, options=options)
 
     try:
         driver.get("https://fansly.com/")
